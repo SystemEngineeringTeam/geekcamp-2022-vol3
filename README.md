@@ -8,7 +8,7 @@
 
 | Tool    | Version  |
 | ------- | -------- |
-| Node.js | v16.13.2 |
+| Node.js | v16.15.0 |
 
 ## Usage
 
