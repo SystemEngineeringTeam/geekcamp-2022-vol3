@@ -2,7 +2,6 @@
 
 ## Introduction
 
-メ
 
 ## Environment
 
