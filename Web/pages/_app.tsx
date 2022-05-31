@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+
 import {
   RecoilRoot,
   atom,
@@ -8,11 +9,11 @@ import {
   useRecoilValue,
 } from 'recoil';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component }: AppProps) {
 
   return (
     <RecoilRoot>
-      <Component {...pageProps} />
+      <Component />
     </RecoilRoot>
   );
 }
