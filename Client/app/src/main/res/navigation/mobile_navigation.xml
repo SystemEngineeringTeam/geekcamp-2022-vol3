@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="io.github.com.harutiro.tempmanager.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_profile"
+        android:name="io.github.com.harutiro.tempmanager.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="io.github.com.harutiro.tempmanager.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_setting"
+        android:name="io.github.com.harutiro.tempmanager.ui.setting.SettingFragment"
+        android:label="@string/title_setting"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
