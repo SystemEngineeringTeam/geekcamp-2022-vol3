@@ -15,7 +15,7 @@
         android:id="@+id/navigation_profile"
         android:name="io.github.com.harutiro.tempmanager.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_setting"
