@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">TempManager</string>
-    <string name="title_home">Home</string>
-    <string name="title_profile">Profile</string>
-    <string name="title_setting">Setting</string>
+    <string name="title_home">ホーム</string>
+    <string name="title_profile">プロフィール</string>
+    <string name="title_setting">設定</string>
     <string name="student_number_profile_fragment_layout">学籍番号</string>
     <string name="name_profile_fragment_layout">名前</string>
     <string name="profile_fix_button_profile_fragment_layout">プロフィールの変更</string>
