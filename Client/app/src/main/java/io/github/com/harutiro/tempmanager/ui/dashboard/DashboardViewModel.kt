@@ -1,13 +1,13 @@
-package io.github.com.harutiro.tempmanager.ui.slideshow
+package io.github.com.harutiro.tempmanager.ui.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SlideshowViewModel : ViewModel() {
+class DashboardViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is slideshow Fragment"
+        value = "This is dashboard Fragment"
     }
     val text: LiveData<String> = _text
 }
