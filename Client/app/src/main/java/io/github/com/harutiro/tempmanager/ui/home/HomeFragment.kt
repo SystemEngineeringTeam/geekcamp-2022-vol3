@@ -4,34 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import io.github.com.harutiro.tempmanager.databinding.FragmentHomeBinding
+
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    //TODO: 本来のURLに変更にする
+    val URL = "https://google.com"
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        // Web Viewの初期設定
+        binding.webView.setWebViewClient(WebViewClient()) // WebViewを設定する
+        binding.webView.settings.javaScriptEnabled = true // JavaScriptを有効にする
+        binding.webView.loadUrl(URL) // URLを読み込む
+
+
         return root
     }
 
@@ -39,4 +40,5 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }
