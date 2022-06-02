@@ -15,6 +15,7 @@ class HomeFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    //TODO: 本来のURLに変更にする
     val URL = "https://google.com"
 
     override fun onCreateView(
