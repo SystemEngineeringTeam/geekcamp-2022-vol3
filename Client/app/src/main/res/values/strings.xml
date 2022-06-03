@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TempManager</string>
+    <string name="app_name">体温・入退室管理システム</string>
     <string name="title_home">ホーム</string>
     <string name="title_profile">プロフィール</string>
     <string name="title_setting">設定</string>
