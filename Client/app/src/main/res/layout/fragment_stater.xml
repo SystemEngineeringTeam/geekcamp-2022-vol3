@@ -9,7 +9,7 @@
     tools:context=".welcome_ui.stater.StaterFragment">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/main_edit2"
+        android:id="@+id/login_button_stater_fragment"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/welcome_textview_stater_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/intor_textview_stater_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -48,15 +48,15 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome_textview_stater_fragment" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/set_icon_imageview_stater_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/set_icon"
-        app:layout_constraintBottom_toTopOf="@+id/main_edit2"
+        app:layout_constraintBottom_toTopOf="@+id/login_button_stater_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/intor_textview_stater_fragment" />
 </androidx.constraintlayout.widget.ConstraintLayout>
