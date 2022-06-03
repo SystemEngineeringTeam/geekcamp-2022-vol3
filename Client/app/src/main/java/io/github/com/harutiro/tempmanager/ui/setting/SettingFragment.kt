@@ -1,5 +1,6 @@
 package io.github.com.harutiro.tempmanager.ui.setting
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import io.github.com.harutiro.tempmanager.WelcomeActivity
 import io.github.com.harutiro.tempmanager.databinding.FragmentNotificationsBinding
 
 class SettingFragment : Fragment() {
@@ -22,16 +24,17 @@ class SettingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(SettingViewModel::class.java)
-
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+
+        binding.welcomeTestButton.setOnClickListener {
+            val intent = Intent(context, WelcomeActivity::class.java)
+            startActivity(intent)
+
         }
+
+
         return root
     }
 

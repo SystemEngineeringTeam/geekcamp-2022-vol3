@@ -19,4 +19,5 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter
             else -> throw IllegalArgumentException()
         }
 
+
 }
