@@ -1,8 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
-
-const serviceAccount = require('../../geekcamp-ed.json');
 const admin = require('firebase-admin');
 
 
@@ -17,16 +14,21 @@ export default async function handler(
     res: NextApiResponse,
 ) {
     const COLLECTION_NAME = 'RoomLog';
-    const db = getFirestore();
     let users: string[] = [];
 
 
     // 初期化を行う
     if (admin.apps.length === 0) {
         admin.initializeApp({
-            credential: cert(serviceAccount),
+            credential: admin.credential.cert({
+                projectId: process.env.PROJECT_ID,
+                privateKey: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+                clientEmail: process.env.CLIENT_EMAIL,
+            }),
         });
+        console.log(process.env.PROJECT_ID);
     }
+    const db = getFirestore();
 
     // レスポンス処理
     // 現在の入室状況を取得する
