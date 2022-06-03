@@ -37,6 +37,7 @@ export default async function handler(
     }
     const db = getFirestore();
 
+    
     // レスポンス処理
     // 現在の入室状況を取得する
     if (req.method === 'GET') {
