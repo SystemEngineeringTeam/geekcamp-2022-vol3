@@ -62,7 +62,7 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_id_edit_text"
+            android:id="@+id/main_student_number_edit_text_profile_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/student_number_profile_fragment_layout"
