@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getFirestore } from 'firebase-admin/firestore';
+import { assertIsDefined } from "helpers/assert";
 const admin = require('firebase-admin');
 
 
@@ -9,6 +10,13 @@ function getDate() {
     const date_parse = date.split('/').join('-');
     return date_parse;
 }
+
+
+const cert = {
+    projectId: process.env.PROJECT_ID,
+    clientEmail: process.env.CLIENT_EMAIL,
+    privateKey: process.env.PRIVATE_KEY?.replace(/\\n/g, "\n"),
+};
 
 // ステータスを取得する関数
 export default async function handler(
@@ -24,11 +32,7 @@ export default async function handler(
     // https://github.com/firebase/firebase-tools/issues/1532
     if (admin.apps.length === 0) {
         admin.initializeApp({
-            credential: admin.credential.cert({
-                projectId: process.env.PROJECT_ID,
-                privateKey: process.env.PRIVATE_KEY,
-                clientEmail: process.env.CLIENT_EMAIL,
-            }),
+            credential: admin.credential.cert(cert),
         });
         console.log(process.env.PROJECT_ID);
     }
