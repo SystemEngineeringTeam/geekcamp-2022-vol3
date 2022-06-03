@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "941649940857",
+    "project_id": "geekcamp2022",
+    "storage_bucket": "geekcamp2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941649940857:android:31e870b86190ad62725fa8",
+        "android_client_info": {
+          "package_name": "io.github.com.harutiro.tempmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941649940857-gf6ik7bsgf9s7t6fntgd5jum47jooris.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.github.com.harutiro.tempmanager",
+            "certificate_hash": "111c4393847a235cf3f8ed5fe126ad27bc8cc320"
+          }
+        },
+        {
+          "client_id": "941649940857-0an87vb95rmaosubnd062paf9gnmi1og.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdpPhCVP_ZH2R9OeJ-kE3h39_PyEEeLds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941649940857-0an87vb95rmaosubnd062paf9gnmi1og.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
