@@ -3,7 +3,7 @@ import time
 from beacontools import BeaconScanner, IBeaconFilter, IBeaconAdvertisement
  
 def callback(bt_addr, rssi, packet, additional_info):
-    print(" %s" % (packet))
+    print(" %s" % (packet.major))
  
 # scan for all iBeacon advertisements from beacons with certain properties:
 # - uuid
