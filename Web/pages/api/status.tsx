@@ -14,7 +14,7 @@ function getDate() {
 const cert = {
     projectId: process.env.PROJECT_ID,
     clientEmail: process.env.CLIENT_EMAIL,
-    privateKey: process.env.PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    privateKey: process.env.PRIVATE_KEY.replace(/\\n/g, "\n"),
 };
 
 // ステータスを取得する関数
@@ -37,7 +37,7 @@ export default async function handler(
     }
     const db = getFirestore();
 
-    
+
     // レスポンス処理
     // 現在の入室状況を取得する
     if (req.method === 'GET') {
