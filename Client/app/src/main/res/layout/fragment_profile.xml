@@ -78,11 +78,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:src="@drawable/account_circle_fill0_wght400_grad0_opsz48"
-        android:tint="@color/text"
         app:layout_constraintBottom_toBottomOf="@+id/name_edit_text_profile_fragment"
         app:layout_constraintEnd_toStartOf="@+id/name_edit_text_profile_fragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/name_edit_text_profile_fragment" />
+        app:layout_constraintTop_toTopOf="@+id/name_edit_text_profile_fragment"
+        app:tint="@color/text" />
 
     <ImageView
         android:id="@+id/student_number_icon_image_view_profile_fragment"
@@ -90,10 +90,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:src="@drawable/badge_fill0_wght400_grad0_opsz48"
-        android:tint="@color/text"
         app:layout_constraintBottom_toBottomOf="@+id/student_number_edit_text_profile_fragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/student_number_edit_text_profile_fragment" />
+        app:layout_constraintTop_toTopOf="@+id/student_number_edit_text_profile_fragment"
+        app:tint="@color/text" />
 
     <ImageButton
         android:id="@+id/user_icon_image_view_profile_fragment"
