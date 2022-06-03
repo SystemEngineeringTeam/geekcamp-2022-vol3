@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getFirestore } from 'firebase-admin/firestore';
-import { assertIsDefined } from "helpers/assert";
 const admin = require('firebase-admin');
 
 
