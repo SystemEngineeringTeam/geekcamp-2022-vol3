@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".welcome_ui.stater.StaterFragment">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_button_stater_fragment"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="64dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="ログイン"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        app:backgroundTint="@color/purple_500"
+        app:cornerRadius="20dp"
+        app:icon="@android:drawable/ic_dialog_info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/welcome_textview_stater_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="ようこそ"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/intor_textview_stater_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="シス研温度・入退室\n管理システムへ\n(｀・∀・)ﾉ"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_textview_stater_fragment" />
+
+    <ImageView
+        android:id="@+id/set_icon_imageview_stater_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/set_icon"
+        app:layout_constraintBottom_toTopOf="@+id/login_button_stater_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/intor_textview_stater_fragment" />
+</androidx.constraintlayout.widget.ConstraintLayout>
