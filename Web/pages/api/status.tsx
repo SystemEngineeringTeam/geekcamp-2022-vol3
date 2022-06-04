@@ -33,12 +33,21 @@ function getTime() {
     }
 }
 
+// 渡されたUUIDから、USERのUUIDを検索し、見つかった場合は、UserのICONIMAGEを返す
+async function getUserIconImage(uuid: string) {
+    const db = getFirestore();
+    const user = await db.collection('User').doc().get();
+    console.log(user.data());
+}
+
 
 const cert = {
     projectId: process.env.PROJECT_ID,
     clientEmail: process.env.CLIENT_EMAIL,
     privateKey: process.env.PRIVATE_KEY?.replace(/\\n/g, "\n"),
 };
+
+
 
 // ステータスを取得する関数
 export default async function handler(
@@ -65,9 +74,38 @@ export default async function handler(
     // 現在の入室状況を取得する
     if (req.method === 'GET') {
         const RoomLog = db.collection(COLLECTION_NAME);
-        const nowDate = await RoomLog.doc(getDate()).collection("Times").doc(getTime()).get();
-        console.log(getTime());
-        console.log(nowDate.data());
-        res.status(200).json(nowDate.data());
+        const entering_room_status = await RoomLog.doc(getDate()).collection("Times").doc("15-00").get();
+        const current_uuid = entering_room_status.data()?.UUID;
+        const current_name = entering_room_status.data()?.NAME;
+
+        // ユーザーのアイコン画像を取得する
+        // 型がObjectである為、Object.keysでforEachで回す
+        // ['0eb072af-55ee-70cd-8026-d15875eb7a5f','d0d3e56a-d4f7-4c31-af6f-d367bf93630d']
+
+        let icon_image_urls: string[] = [];
+
+        Object.keys(current_uuid).forEach(async (key) => {
+            // 単一のUUIDを取得する
+            const uuid = current_uuid[key];
+            // Userに入ってる全てのUUIDを取得する
+            const all_user = await db.collection('User').get();
+
+            // 取得したUUIDと一致するものがあれば、アイコン画像を取得する
+            all_user.forEach(doc => {
+                if (doc.data().UUID === uuid) {
+                    icon_image_urls.push(doc.data().ICONIMAGE);
+                    console.log(doc.data().ICONIMAGE);
+                }
+            });
+        })
+
+        // レスポンスを返す
+        setTimeout(() => {
+            res.status(200).json({
+                current_name,
+                icon_image_urls,
+            });
+        }
+            , 1000);
     }
 }
