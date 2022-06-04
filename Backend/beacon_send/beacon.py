@@ -62,4 +62,4 @@ while True:
     major_list.clear()
     uuid_list.clear()
     # 発火処理
-    schedule(5, worker)
+    schedule(300, worker)
