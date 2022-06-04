@@ -7,7 +7,7 @@ major_list = []
 uuid_list = []
 
 def worker():
-    print(time.time())
+    #print(time.time())
     time.sleep(8)
 
 def schedule(interval, f, wait=True):
