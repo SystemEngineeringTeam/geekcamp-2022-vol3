@@ -17,7 +17,9 @@ const Home: NextPage = () => {
   return (
     <>
       <NavigateBar />
-      <CountDisplay />
+      <div className='CountDisplay-margin'>
+        <CountDisplay />
+      </div>
     </>
   );
 }
