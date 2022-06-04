@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import NavigateBar from "../components/NavigateBar";
 
 const Home: NextPage = () => {
   const [getUsers, setUsers] = useState();
@@ -13,9 +14,10 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      <NavigateBar />
       {getUsers}
-    </div>
+    </>
   );
 }
 
