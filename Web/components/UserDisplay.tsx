@@ -4,6 +4,8 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
+import { userListState, userIconListState } from 'pages';
+import { useRecoilValue } from 'recoil';
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#7986CB',
     ...theme.typography.body2,
@@ -13,6 +15,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const UserDisplay: NextPage = () => {
 
+    const getUserList = useRecoilValue(userListState);
+    const getUserIconList = useRecoilValue(userIconListState);
     return (
         <>
             <section className="card-list">
@@ -24,14 +28,12 @@ const UserDisplay: NextPage = () => {
                         justifyContent="flex-start"
 
                         spacing={1}>
-                        <Item className='Item'>
-                            <Avatar className="Avatar-chip" sx={{ width: 30, height: 30 }} src="https://avatars.githubusercontent.com/u/26848713?v=4" />
-                            <div className='Item-chip'>hiumikan</div>
-                        </Item>
-                        <Item className='Item'>
-                            <Avatar className="Avatar-chip" sx={{ width: 30, height: 30 }} src="https://avatars.githubusercontent.com/u/26848713?v=4" />
-                            <div className='Item-chip'>hiumikan</div>
-                        </Item>
+                        {getUserList.map((user, index) => (
+                            <Item className='Item' key={index}>
+                                <Avatar className="Avatar-chip" sx={{ width: 30, height: 30 }} src={getUserIconList[index]} />
+                                <div className='Item-chip'>{user}</div>
+                            </Item>
+                        ))}
                     </Stack>
                 </Box>
             </section>
