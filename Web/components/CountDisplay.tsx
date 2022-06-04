@@ -1,14 +1,9 @@
 import type { NextPage } from 'next';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import styled from '@emotion/styled'
 
 const CountDisplay: NextPage = () => {
-    const [getUsers, setUsers] = useState();
+    const [getUsers, setUsers] = useState<number>(0);
     useEffect(() => {
         const getUser = async () => {
             const users = await axios.get('/api/status');
@@ -19,15 +14,20 @@ const CountDisplay: NextPage = () => {
 
     return (
         <>
-            <Container fixed>
-                <Card sx={{ minWidth: 275 }}>
-                    <CardContent>
-                        <Typography variant="h5" component="div">
-                            現在: 0人
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Container>
+            <section className="card">
+                <div className='card-top'>
+                    入室状況
+                </div>
+                <div className="card-content">
+                    <h1 className="card-title">現在:</h1>
+                    <h1 className="card-count">{getUsers}人</h1>
+                </div>
+            </section>
+            <section className="card">
+                <div className='card-top'>
+                    リスト
+                </div>
+            </section>
         </>
     );
 }

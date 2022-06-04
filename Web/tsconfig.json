@@ -19,6 +19,7 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": "./",
+    "jsxImportSource": "@emotion/react",
     "paths": {
       "@/*": [
         "./src/*"

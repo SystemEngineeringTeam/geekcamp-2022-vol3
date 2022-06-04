@@ -13,3 +13,44 @@ a {
 * {
   box-sizing: border-box;
 }
+
+body {
+  background: #f5f5f5;
+}
+
+.card {
+  margin: 50px auto;
+  width: 450px;
+  height: 150px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #ccc;
+
+}
+
+.card-top {
+  position: absolute;
+  padding-top: 7px;
+  padding-left: 10px;
+  color: #414141;
+  font-size: 16px;
+  font-weight: 1000;
+}
+
+.card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.card-title {
+  font-size: 40px;
+  color: #414141;
+  margin-right: 20px;
+  margin-top: 70px;
+}
+
+.card-count {
+  font-size: 80px;
+  margin-top: 30px;
+  color: #414141;
+}
