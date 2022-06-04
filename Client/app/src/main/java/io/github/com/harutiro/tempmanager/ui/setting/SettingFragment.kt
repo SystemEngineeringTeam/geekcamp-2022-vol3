@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
+import io.github.com.harutiro.tempmanager.TempEditAcitivity
 import io.github.com.harutiro.tempmanager.WelcomeActivity
 import io.github.com.harutiro.tempmanager.databinding.FragmentNotificationsBinding
 
@@ -43,6 +44,11 @@ class SettingFragment : Fragment() {
 
             //TODO：　ログアウトしたときにProfileデータが残る問題を解決
 
+        }
+
+        binding.editTempButton.setOnClickListener {
+            val intent = Intent(context, TempEditAcitivity::class.java)
+            startActivity(intent)
         }
 
 

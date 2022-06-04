@@ -52,7 +52,7 @@ class IbeaconOutputService : Service() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID )
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("ビーコンの送信中")
-            .setContentText("体温はOOO°で送信しています。")
+            .setContentText("体温は${intent?.getStringExtra("TEMP")}°で送信しています。")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(openIntent)
             .build()
@@ -68,7 +68,7 @@ class IbeaconOutputService : Service() {
         //テキストボックスの情報を取得
         val uuid = intent?.getStringExtra("UUID") ?:""
         val major = "56562"
-        val minor = "999"
+        val minor = intent?.getStringExtra("TEMP")?.toDouble()?.times(10)?.toInt().toString() ?:"0"
 
         //beaconのビルダーで、どんなデータを送信するか作成する。
         val beacon = Beacon.Builder()
