@@ -8,7 +8,6 @@ const Home: NextPage = () => {
     const getUser = async () => {
       const users = await axios.get('/api/status');
       console.log(users.data);
-      setUsers(users.data.name);
     };
     getUser();
   }, []);
