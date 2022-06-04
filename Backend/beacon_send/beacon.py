@@ -58,4 +58,6 @@ while True:
     writer = csv.writer(f,lineterminator='\n')
     writer.writerow(data)
     f.close()
+    major_list.clear()
+    uuid_list.clear()
     schedule(5, worker)
