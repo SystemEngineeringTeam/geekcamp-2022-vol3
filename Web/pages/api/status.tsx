@@ -78,6 +78,8 @@ export default async function handler(
         const current_uuid = entering_room_status.data()?.UUID;
         const current_name = entering_room_status.data()?.NAME;
 
+        console.log("current_uuid:" + current_uuid);
+        console.log("current_name:" + current_name);
         // ユーザーのアイコン画像を取得する
         // 型がObjectである為、Object.keysでforEachで回す
         // ['0eb072af-55ee-70cd-8026-d15875eb7a5f','d0d3e56a-d4f7-4c31-af6f-d367bf93630d']
