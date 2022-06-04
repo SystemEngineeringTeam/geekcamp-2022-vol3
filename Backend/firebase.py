@@ -45,28 +45,42 @@ def main():
             major = []
             uuid = []
             for row in csv_reader:
-                major.append(str(row[0]))
-                uuid.append(str(row[1]))
+                major.append(row[0])
+                uuid.append(row[1])
             #print(list_of_rows[0][0])
-            print(major)
+            #print(major)
             #print(list_of_rows[0][1])
+            print(uuid)
         dt_now = datetime.datetime.now()
-        try:
-            # Firestoreのコレクションにアクセス
-            doc_ref = db.collection(u'RoomLog').document(dt_now.strftime(u'%Y-%m-%d')).collection(u"Times").document(dt_now.strftime(u'%H:%M'))
-            # Firestoreにドキュメントidを指定しないで１つづつニュースを保存
-            doc_ref.set({
-                u'NAME': 'hoge',
-                u'TIME':dt_now.strftime(u'%H:%M'),
-            })
-        except:
-            print('error')
+        # try:
+        #     # Firestoreのコレクションにアクセス
+        #     doc_ref = db.collection(u'RoomLog').document(dt_now.strftime(u'%Y-%m-%d')).collection(u"Times").document(dt_now.strftime(u'%H:%M'))
+        #     # Firestoreにドキュメントidを指定しないで１つづつニュースを保存
+        #     doc_ref.set({
+        #         u'NAME': 'hoge',
+        #         u'TIME':dt_now.strftime(u'%H:%M'),
+        #     })
+        # except:
+        #     print('error')
         #print(dt_now.strftime(u'%Y-%m-%d %H:%M:%S'))
+        print(uuid)
         for _ in doc_user:
             #print(_.id)
             doc = db.collection(u'User').document(_.id)
             my_dict = doc.get().to_dict()
+            # for i in uuid[0]:
+            #     print(i)
+            if my_dict['UUID'] in uuid:
+                print(my_dict['UUID'])
+                doc_ref = db.collection(u'RoomLog').document(dt_now.strftime(u'%Y-%m-%d')).collection(u"Times").document(dt_now.strftime(u'%H:%M'))
+                doc_ref.set({
+                    u'NAME': my_dict['NAME'],
+                    u'TIME':dt_now.strftime(u'%H:%M'),
+                })
+            else:
+                print("error")
             # print(my_dict["UUID"])
+            # print(uuid)
             # print(my_dict["NAME"])
         schedule(5, worker)
 print('done')

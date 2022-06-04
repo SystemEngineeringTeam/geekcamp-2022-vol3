@@ -5,6 +5,7 @@ from beacontools import BeaconScanner, IBeaconFilter, IBeaconAdvertisement
 
 major_list = []
 uuid_list = []
+data = []
 
 def worker():
     #print(time.time())
@@ -22,15 +23,10 @@ def schedule(interval, f, wait=True):
 
 while True:
     def callback(bt_addr, rssi, packet, additional_info):
-        # major_list = []
-        # uuid_list = []
+        # majorとuuidをlistに格納
         major_list.append(packet.major)
         uuid_list.append(packet.uuid)
-        #f = open('beacon_out.csv', 'w')
-        # data = [packet.major,packet.uuid]
-        # writer = csv.writer(f)
-        # writer.writerow(data)
-        # f.close()
+
         #print("<%s, %d> %s %s" % (bt_addr, rssi, packet, additional_info))
 
 # scan for all iBeacon advertisements from beacons with certain properties:
@@ -52,12 +48,18 @@ while True:
     scanner.start()
     time.sleep(5)
     scanner.stop()
-    print(major_list,uuid_list)
+    #print(major_list,uuid_list)
+    # csvへデータ入力
     f = open('beacon_out.csv', 'w')
-    data = [major_list,uuid_list]
-    writer = csv.writer(f,lineterminator='\n')
-    writer.writerow(data)
+    for _ in range(len(major_list)):
+        data = major_list[_],uuid_list[_]
+        #print(major_list[_])
+        # majorが56562(既に設定済み)のもの以外は除外
+        if major_list[_] == 56562:
+            writer = csv.writer(f,lineterminator='\n')
+            writer.writerow(data)
     f.close()
     major_list.clear()
     uuid_list.clear()
+    # 発火処理
     schedule(5, worker)
