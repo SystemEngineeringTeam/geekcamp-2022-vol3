@@ -1,6 +1,8 @@
 package io.github.com.harutiro.tempmanager
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -33,7 +35,11 @@ class MainActivity : AppCompatActivity() {
             // User is signed in
             Log.d(TAG,user.email.toString())
 
+            val dataStore: SharedPreferences = getSharedPreferences("DateStore", Context.MODE_PRIVATE)
+
+
             val intent = Intent(this, IbeaconOutputService::class.java)
+            intent.putExtra("UUID",dataStore.getString("UUID",""))
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForegroundService(intent)
             }

@@ -4,8 +4,12 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.bluetooth.le.AdvertiseCallback
+import android.bluetooth.le.AdvertiseSettings
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
@@ -13,6 +17,9 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import io.github.com.harutiro.tempmanager.MainActivity
 import io.github.com.harutiro.tempmanager.R
+import org.altbeacon.beacon.Beacon
+import org.altbeacon.beacon.BeaconParser
+import org.altbeacon.beacon.BeaconTransmitter
 
 class IbeaconOutputService : Service() {
 
@@ -52,6 +59,43 @@ class IbeaconOutputService : Service() {
 
         //5．フォアグラウンド開始。
         startForeground(2222, notification)
+
+
+        //ビーコンのパーサーの作成、ibeaconの取得をするときに必要
+        val beaconParser = BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24")
+        val beaconTransmitter = BeaconTransmitter(applicationContext, beaconParser)
+
+        //テキストボックスの情報を取得
+
+        val uuid = intent?.getStringExtra("UUID") ?:""
+        val major = "56562"
+        val minor = "999"
+
+        //beaconのビルダーで、どんなデータを送信するか作成する。
+        val beacon = Beacon.Builder()
+            .setId1(uuid)
+            .setId2(major)
+            .setId3(minor)
+            .setManufacturer(0x004C)
+            .build()
+
+        //実際にbeaconを開始する部分
+        beaconTransmitter.startAdvertising(beacon, object : AdvertiseCallback() {
+
+            //正しく動作したとき
+            override fun onStartSuccess(settingsInEffect: AdvertiseSettings) {
+                super.onStartSuccess(settingsInEffect)
+                Log.d("debag","OK")
+
+            }
+
+            //失敗したとき
+            override fun onStartFailure(errorCode: Int) {
+                Log.d("debag","NO")
+            }
+        })
+
+
 
         return START_STICKY
     }
