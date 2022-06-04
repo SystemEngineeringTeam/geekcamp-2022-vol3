@@ -4,12 +4,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 
-class StopIbeaconServiseReceiver: BroadcastReceiver() {
+class StopIbeaconForegroundReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        val targetIntent = Intent(context, IbeaconInputService::class.java)
+        val targetIntent = Intent(context, IbeaconOutputService::class.java)
         context.stopService(targetIntent)
-
-
     }
 }

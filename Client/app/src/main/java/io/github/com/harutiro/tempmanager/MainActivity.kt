@@ -1,6 +1,9 @@
 package io.github.com.harutiro.tempmanager
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -11,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
 import io.github.com.harutiro.tempmanager.databinding.ActivityMainBinding
+import io.github.com.harutiro.tempmanager.service.IbeaconOutputService
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +34,16 @@ class MainActivity : AppCompatActivity() {
         if (user != null) {
             // User is signed in
             Log.d(TAG,user.email.toString())
+
+            val dataStore: SharedPreferences = getSharedPreferences("DateStore", Context.MODE_PRIVATE)
+
+
+            val intent = Intent(this, IbeaconOutputService::class.java)
+            intent.putExtra("UUID",dataStore.getString("UUID",""))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            }
+
         } else {
             // No user is signed in
             Log.d(TAG,"NoAccount")

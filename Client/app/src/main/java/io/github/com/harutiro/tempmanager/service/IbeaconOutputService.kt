@@ -4,24 +4,24 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.bluetooth.le.AdvertiseCallback
+import android.bluetooth.le.AdvertiseSettings
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.Observer
 import io.github.com.harutiro.tempmanager.MainActivity
 import io.github.com.harutiro.tempmanager.R
+import org.altbeacon.beacon.Beacon
+import org.altbeacon.beacon.BeaconParser
+import org.altbeacon.beacon.BeaconTransmitter
 
-class IbeaconInputService : Service() {
-
-
-    // iBeaconのデータを認識するためのParserフォーマット
-    val IBEACON_FORMAT = "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
-
-    val TAG = "ibeaconService"
+class IbeaconOutputService : Service() {
 
     companion object {
         const val CHANNEL_ID = "1111"
@@ -51,8 +51,8 @@ class IbeaconInputService : Service() {
         //4．通知の作成（ここでPendingIntentを通知領域に渡す）
         val notification = NotificationCompat.Builder(this, CHANNEL_ID )
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("入退室管理中")
-            .setContentText("現在部屋に入室されていません。")
+            .setContentTitle("ビーコンの送信中")
+            .setContentText("体温はOOO°で送信しています。")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(openIntent)
             .build()
@@ -61,11 +61,43 @@ class IbeaconInputService : Service() {
         startForeground(2222, notification)
 
 
+        //ビーコンのパーサーの作成、ibeaconの取得をするときに必要
+        val beaconParser = BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24")
+        val beaconTransmitter = BeaconTransmitter(applicationContext, beaconParser)
+
+        //テキストボックスの情報を取得
+        val uuid = intent?.getStringExtra("UUID") ?:""
+        val major = "56562"
+        val minor = "999"
+
+        //beaconのビルダーで、どんなデータを送信するか作成する。
+        val beacon = Beacon.Builder()
+            .setId1(uuid)
+            .setId2(major)
+            .setId3(minor)
+            .setManufacturer(0x004C)
+            .build()
+
+        //実際にbeaconを開始する部分
+        beaconTransmitter.startAdvertising(beacon, object : AdvertiseCallback() {
+
+            //正しく動作したとき
+            override fun onStartSuccess(settingsInEffect: AdvertiseSettings) {
+                super.onStartSuccess(settingsInEffect)
+                Log.d("debag","OK")
+
+            }
+
+            //失敗したとき
+            override fun onStartFailure(errorCode: Int) {
+                Log.d("debag","NO")
+            }
+        })
+
+
 
         return START_STICKY
     }
-
-
 
     override fun stopService(name: Intent?): Boolean {
         return super.stopService(name)
