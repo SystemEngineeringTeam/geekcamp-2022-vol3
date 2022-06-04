@@ -11,17 +11,10 @@ import android.os.IBinder
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.Observer
 import io.github.com.harutiro.tempmanager.MainActivity
 import io.github.com.harutiro.tempmanager.R
 
-class IbeaconInputService : Service() {
-
-
-    // iBeaconのデータを認識するためのParserフォーマット
-    val IBEACON_FORMAT = "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
-
-    val TAG = "ibeaconService"
+class IbeaconOutputService : Service() {
 
     companion object {
         const val CHANNEL_ID = "1111"
@@ -51,8 +44,8 @@ class IbeaconInputService : Service() {
         //4．通知の作成（ここでPendingIntentを通知領域に渡す）
         val notification = NotificationCompat.Builder(this, CHANNEL_ID )
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("入退室管理中")
-            .setContentText("現在部屋に入室されていません。")
+            .setContentTitle("フォアグラウンドのテスト中")
+            .setContentText("終了する場合はこちらから行って下さい。")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(openIntent)
             .build()
@@ -60,12 +53,8 @@ class IbeaconInputService : Service() {
         //5．フォアグラウンド開始。
         startForeground(2222, notification)
 
-
-
         return START_STICKY
     }
-
-
 
     override fun stopService(name: Intent?): Boolean {
         return super.stopService(name)
