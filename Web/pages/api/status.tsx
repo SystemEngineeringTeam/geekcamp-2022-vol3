@@ -10,6 +10,29 @@ function getDate() {
     return date_parse;
 }
 
+// 時間(HH-MM)を取得
+function getTime() {
+
+    const getHour = new Date().getHours();
+    const getMinutes = new Date().getMinutes();
+
+    // getMinutesを5分単位にして、５分前にする
+    const getMinutes_5 = Math.floor(getMinutes / 5) * 5;
+
+    // getMinutes_5が0の場合は、00にする
+    if (getMinutes_5 === 0) {
+        const getMinutes_5_str = '00';
+        return getHour + '-' + getMinutes_5_str;
+    } else {
+        if (getMinutes_5 < 10) {
+            const getMinutes_5_str = '0' + getMinutes_5;
+            return getHour + '-' + getMinutes_5_str;
+        } else {
+            return getHour + '-' + getMinutes_5;
+        }
+    }
+}
+
 
 const cert = {
     projectId: process.env.PROJECT_ID,
@@ -37,18 +60,14 @@ export default async function handler(
     }
     const db = getFirestore();
 
-    
+
     // レスポンス処理
     // 現在の入室状況を取得する
     if (req.method === 'GET') {
-        const doc = await db.collection(COLLECTION_NAME).get();
-        console.log(doc);
-        doc.forEach((i) => {
-            if (i.id === getDate()) {
-                console.log(i.id, '=>', i.data());
-                res.status(200).json(i.data());
-            }
-        });
-
+        const RoomLog = db.collection(COLLECTION_NAME);
+        const nowDate = await RoomLog.doc(getDate()).collection("Times").doc(getTime()).get();
+        console.log(getTime());
+        console.log(nowDate.data());
+        res.status(200).json(nowDate.data());
     }
 }
