@@ -15,8 +15,7 @@ class HomeFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    //TODO: 本来のURLに変更にする
-    val URL = "https://google.com"
+    val URL = "http://opc3.qqey.net/"
 
     override fun onCreateView(
         inflater: LayoutInflater,
