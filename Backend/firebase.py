@@ -30,7 +30,9 @@ def main():
     cred = credentials.Certificate(JSON_PATH)
     firebase_admin.initialize_app(cred)
     db = firestore.client()
-    name = ['hoge','fuga','piyo']
+    name = np.array(['hoge','fuga','piyo'],dtype=str)
+
+    doc_user = db.collection('User').get()
     # ====================================================================
 
 
@@ -47,23 +49,18 @@ def main():
         except:
             print('error')
         print(dt_now.strftime(u'%Y-%m-%d %H:%M:%S'))
-        schedule(1, worker)
-
+        for _ in doc_user:
+            print(_.id)
+            doc = db.collection(u'User').document(_.id)
+            my_dict = doc.get().to_dict()
+            print(my_dict["UUID"])
+            print(my_dict["NAME"])
+        schedule(5, worker)
 print('done')
 
 
 if __name__ == '__main__':
     main()
-
-# import requests
-# from bs4 import BeautifulSoup
-# import re
-# import datetime
-# import time
-# from firebase_admin import firestore
-# import firebase_admin
-# from firebase_admin import credentials
-# # from beacon_send import beacon
 
 # roomlog_name = []
 # dt_now = datetime.datetime.now()
