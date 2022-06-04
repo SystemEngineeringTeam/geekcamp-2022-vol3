@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
 
         Glide.with(context).load(dataStore.getString("ICONIMAGE","")).into(binding.userIconImageButtonProfileFragment)
 
-
+        //TODO：Profileの編集をできるようにする。
 
         return root
     }

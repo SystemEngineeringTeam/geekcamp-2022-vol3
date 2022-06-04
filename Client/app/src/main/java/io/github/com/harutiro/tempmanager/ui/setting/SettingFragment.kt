@@ -41,6 +41,8 @@ class SettingFragment : Fragment() {
             val intent = Intent(context,WelcomeActivity::class.java)
             startActivity(intent)
 
+            //TODO：　ログアウトしたときにProfileデータが残る問題を解決
+
         }
 
 
