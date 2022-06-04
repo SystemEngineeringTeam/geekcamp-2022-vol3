@@ -20,6 +20,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import io.github.com.harutiro.tempmanager.R
 import io.github.com.harutiro.tempmanager.databinding.FragmentAcountBinding
@@ -156,10 +157,30 @@ class StaterFragment : Fragment() {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success")
                             val user = auth.currentUser
-
                             Log.d(TAG, user?.email.toString())
 
-                            requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem = 1
+                            val db = Firebase.firestore
+                            db.collection("User")
+                                .whereEqualTo("EMAIL", user?.email.toString())
+                                .get()
+                                .addOnSuccessListener { result ->
+                                    for (document in result) {
+                                        Log.d(TAG, "${document.id} => ${document.data}")
+                                        Log.d(TAG, "${document.id} => ${document.data.size}")
+                                    }
+
+                                    if(result.size()>0){
+                                        requireActivity().finish()
+                                    }else{
+                                        requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem = 1
+                                    }
+
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.w(TAG, "Error getting documents.", exception)
+                                }
+
+
 //                                updateUI(user)
                         } else {
                             // If sign in fails, display a message to the user.
@@ -174,8 +195,6 @@ class StaterFragment : Fragment() {
             }
         }
     }
-
-
 
     override fun onStart() {
         super.onStart()
