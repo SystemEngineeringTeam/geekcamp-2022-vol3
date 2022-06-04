@@ -44,16 +44,6 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
         if (user != null) {
             // User is signed in
             Log.d(TAG,user.email.toString())
-
-            val dataStore: SharedPreferences = getSharedPreferences("DateStore", Context.MODE_PRIVATE)
-
-
-            val intent = Intent(this, IbeaconOutputService::class.java)
-            intent.putExtra("UUID",dataStore.getString("UUID",""))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(intent)
-            }
-
         } else {
             // No user is signed in
             Log.d(TAG,"NoAccount")
@@ -165,9 +155,18 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-        with(NotificationManagerCompat.from(this)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(22, builder.build())
+
+
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            // User is signed in
+            Log.d(TAG,user.email.toString())
+
+            with(NotificationManagerCompat.from(this)) {
+                // notificationId is a unique int for each notification that you must define
+                notify(22, builder.build())
+            }
         }
 
 
