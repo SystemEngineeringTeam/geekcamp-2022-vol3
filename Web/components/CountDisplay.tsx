@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import UserDisplay from './UserDisplay';
 
 const CountDisplay: NextPage = () => {
     const [getUsers, setUsers] = useState<number>(0);
@@ -23,11 +24,7 @@ const CountDisplay: NextPage = () => {
                     <h1 className="card-count">{getUsers}人</h1>
                 </div>
             </section>
-            <section className="card">
-                <div className='card-top'>
-                    リスト
-                </div>
-            </section>
+            <UserDisplay />
         </>
     );
 }

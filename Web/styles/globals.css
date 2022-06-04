@@ -20,7 +20,7 @@ body {
 
 .card {
   margin: 50px auto;
-  width: 450px;
+  width: 480px;
   height: 150px;
   background: #fff;
   border-radius: 5px;
@@ -53,4 +53,46 @@ body {
   font-size: 80px;
   margin-top: 30px;
   color: #414141;
+}
+
+
+
+
+.card-list {
+  margin: 50px auto;
+  width: 480px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #ccc;
+
+}
+
+.card-list-top {
+  padding-top: 7px;
+  padding-left: 10px;
+  color: #414141;
+  font-size: 16px;
+  font-weight: 1000;
+}
+
+.Item {
+  height: 43px;
+}
+
+.Avatar-chip {
+  position: absolute;
+  margin-top: -2px;
+  margin-left: 12px;
+}
+
+.Item-chip {
+  color: #fff;
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+.Bot-chip {
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
