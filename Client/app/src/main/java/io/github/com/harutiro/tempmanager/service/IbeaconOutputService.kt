@@ -51,8 +51,8 @@ class IbeaconOutputService : Service() {
         //4．通知の作成（ここでPendingIntentを通知領域に渡す）
         val notification = NotificationCompat.Builder(this, CHANNEL_ID )
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("フォアグラウンドのテスト中")
-            .setContentText("終了する場合はこちらから行って下さい。")
+            .setContentTitle("ビーコンの送信中")
+            .setContentText("体温はOOO°で送信しています。")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(openIntent)
             .build()
@@ -66,7 +66,6 @@ class IbeaconOutputService : Service() {
         val beaconTransmitter = BeaconTransmitter(applicationContext, beaconParser)
 
         //テキストボックスの情報を取得
-
         val uuid = intent?.getStringExtra("UUID") ?:""
         val major = "56562"
         val minor = "999"
