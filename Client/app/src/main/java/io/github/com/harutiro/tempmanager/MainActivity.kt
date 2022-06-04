@@ -225,6 +225,9 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
 
     override fun didExitRegion(region: Region?) {
         insideRegion = false
+
+        val targetIntent = Intent(this, IbeaconOutputService::class.java)
+        stopService(targetIntent)
         // do nothing here. logging happens in MonitoringActivity
     }
 
