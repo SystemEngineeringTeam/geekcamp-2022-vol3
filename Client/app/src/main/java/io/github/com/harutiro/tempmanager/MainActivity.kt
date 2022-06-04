@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
 
     val TAG = "mainActivity"
 
-    val region = Region("unique-id-001", null, null, null)
+    val region = Region("unique-id-001", Identifier.parse("ba4d8ef7-51a3-110c-a55d-bca1afbba494"), Identifier.parse("56562"), null)
 
     var insideRegion = false
 
