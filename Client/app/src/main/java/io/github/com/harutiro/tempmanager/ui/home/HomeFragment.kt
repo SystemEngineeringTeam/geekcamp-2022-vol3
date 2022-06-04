@@ -26,9 +26,14 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+
         // Web Viewの初期設定
         binding.webView.setWebViewClient(WebViewClient()) // WebViewを設定する
         binding.webView.settings.javaScriptEnabled = true // JavaScriptを有効にする
+
+        binding.webView.settings.loadWithOverviewMode = true;
+        binding.webView.settings.useWideViewPort = true;
         binding.webView.loadUrl(URL) // URLを読み込む
 
 
