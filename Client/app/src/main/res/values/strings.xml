@@ -9,4 +9,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_web_client_id_auth">27205989241-ld20gdfnhrtt0br33tp08bqiqa7itn8l.apps.googleusercontent.com</string>
+    <string name="welcome_textview_stater_fragment_staring">ようこそ</string>
+    <string name="intor_textview_stater_fragment_string">シス研名前出る蔵へ</string>
+    <string name="login_button_stater_fragment_string">ログイン</string>
 </resources>
