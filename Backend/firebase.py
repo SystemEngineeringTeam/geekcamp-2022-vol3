@@ -69,48 +69,9 @@ def main():
                         print('ok')
                     except:
                         print('error')
-            #     print(uuid[i])
-            #     print(my_dict['UUID'])
-            #     doc_ref = db.collection(u'RoomLog').document(dt_now.strftime(u'%Y-%m-%d')).collection(u"Times").document(dt_now.strftime(u'%H:%M'))
-            #     doc_ref.set({
-            #         u'NAME': my_dict['NAME'],
-            #         u'TIME':dt_now.strftime(u'%H:%M'),
-            #     })
-            # else:
-            #     print("error")
-            # i += 1
-            # print(my_dict["UUID"])
-            # print(uuid)
-            # print(my_dict["NAME"])
-        #発火処理
-        schedule(5, worker)
+        schedule(300, worker)
 print('done')
 
 
 if __name__ == '__main__':
     main()
-
-
-
-#     while True:
-#         # if beacon.packet.major == '56562':
-#         for _ in tmp_beacon_major:
-#             if _ == '56562':
-#                 #for doc in docs_user:
-#                 #if beacon.packet.uuid == doc.UUID:
-#                 if tmp_beacon_uuid in tmp2_beacon_uuid:
-#                     # roomlog_name.append(doc.NAME)
-#                     roomlog_name.append(tmp_beacon_name[_])
-#             # Firestoreのコレクションにアクセス
-#                 try:
-#                     doc_ref = db.collection('TempLog')
-#                 # Firesoreにデータを追加
-#                     doc_ref.add({
-#                         'NAME': roomlog_name,
-#                         'UUID': tmp_beacon_uuid,
-#                         'TIMES': dt_now,
-#                     })
-#                 except:
-#                     print('error')
-# if __name__ == '__main__':
-#     main()
