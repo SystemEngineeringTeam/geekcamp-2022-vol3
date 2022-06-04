@@ -171,6 +171,9 @@ class StaterFragment : Fragment() {
 
                                     if(result.size()>0){
                                         requireActivity().finish()
+
+                                        //TODO ここでUserデータをシャプリに保存
+
                                     }else{
                                         requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem = 1
                                     }

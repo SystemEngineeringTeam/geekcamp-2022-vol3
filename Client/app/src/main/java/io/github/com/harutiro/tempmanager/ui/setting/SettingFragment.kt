@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import io.github.com.harutiro.tempmanager.WelcomeActivity
 import io.github.com.harutiro.tempmanager.databinding.FragmentNotificationsBinding
 
@@ -30,6 +31,14 @@ class SettingFragment : Fragment() {
 
         binding.welcomeTestButton.setOnClickListener {
             val intent = Intent(context, WelcomeActivity::class.java)
+            startActivity(intent)
+
+        }
+
+        binding.logoutButton.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+
+            val intent = Intent(context,WelcomeActivity::class.java)
             startActivity(intent)
 
         }

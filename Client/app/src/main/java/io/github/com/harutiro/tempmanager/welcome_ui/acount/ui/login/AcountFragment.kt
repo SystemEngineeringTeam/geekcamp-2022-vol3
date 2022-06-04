@@ -64,6 +64,9 @@ class AcountFragment : Fragment() {
                     Log.w(TAG, "Error adding document", e)
                 }
 
+            //TODO ここでUserデータをシャプリに保存
+
+
 
         }
 
