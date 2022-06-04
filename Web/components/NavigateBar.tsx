@@ -34,7 +34,7 @@ const NavigateBar = () => {
                 <AppBar position="fixed" >
                     <Toolbar>
                         <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                            <Box sx={{ fontWeight: 'bold', m: 1 }}>シス研名前出る蔵</Box>
+                            <Box sx={{ fontWeight: 'bold', m: 1 }}>人の入り見れる蔵</Box>
                         </Typography>
                         <IconButton
                             size="large"
