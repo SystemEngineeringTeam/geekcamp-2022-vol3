@@ -8,6 +8,8 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -76,6 +78,8 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
 
 
 
+        //ここからビーコン関係
+
         val beaconManager = BeaconManager.getInstanceForApplication(this)
 
         beaconManager.beaconParsers.clear()
@@ -136,9 +140,39 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
     override fun didEnterRegion(arg0: Region?) {
         Log.d(TAG, "did enter region.")
         insideRegion = true
-        // Send a notification to the user whenever a Beacon
-        // matching a Region (defined above) are first seen.
-        Log.d(TAG, "Sending notification.")
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+        val openIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val channelId = "room_inside_notify"
+        val builder = NotificationCompat.Builder(this, channelId).apply {
+            setSmallIcon(R.drawable.ic_launcher_foreground)
+            setContentTitle("Notification Title")
+            setContentText("本文みたいなところだよ〜ん。ある程度長い文字列を入れても大丈夫なんだよ〜ん")
+            setFullScreenIntent(openIntent,true)
+            priority = NotificationCompat.PRIORITY_HIGH
+            setAutoCancel(true)
+        }
+
+// API 26 以上の場合は NotificationChannel に登録する
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "部屋に入室する時の通知"
+            val description = "部屋に入室するときの通知が表示されます。"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                this.description = description
+            }
+
+            // システムにチャンネルを登録する
+            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(channel)
+        }
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(1234567, builder.build())
+        }
     }
 
     override fun didExitRegion(region: Region?) {
