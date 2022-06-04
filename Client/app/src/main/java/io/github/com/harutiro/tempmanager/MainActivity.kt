@@ -82,6 +82,13 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
 
         val beaconManager = BeaconManager.getInstanceForApplication(this)
 
+        // 初期化。これがないと画面を２回以上開いた時に２重でデータを受信してしまう
+        beaconManager.removeAllMonitorNotifiers()
+        beaconManager.removeAllRangeNotifiers()
+        beaconManager.rangedRegions.forEach {region ->
+            beaconManager.stopRangingBeaconsInRegion(region)
+        }
+
         beaconManager.beaconParsers.clear()
         beaconManager.beaconParsers.add(BeaconParser().setBeaconLayout(IBEACON_FORMAT))
 
@@ -94,7 +101,7 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
         val builder = Notification.Builder(this)
         builder.setSmallIcon(R.drawable.ic_launcher_foreground)
         builder.setContentTitle("Scanning for Beacons")
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, TempEditAcitivity::class.java)
         val pendingIntent = PendingIntent.getActivity(
             this, 0, intent, PendingIntent.FLAG_MUTABLE
         )
@@ -141,39 +148,81 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
         Log.d(TAG, "did enter region.")
         insideRegion = true
 
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        createNotificationChannel()
 
-        val openIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        val channelId = "room_inside_notify"
-        val builder = NotificationCompat.Builder(this, channelId).apply {
-            setSmallIcon(R.drawable.ic_launcher_foreground)
-            setContentTitle("Notification Title")
-            setContentText("本文みたいなところだよ〜ん。ある程度長い文字列を入れても大丈夫なんだよ〜ん")
-            setFullScreenIntent(openIntent,true)
-            priority = NotificationCompat.PRIORITY_HIGH
-            setAutoCancel(true)
+        // Create an explicit intent for an Activity in your app
+        val intent = Intent(this,TempEditAcitivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-// API 26 以上の場合は NotificationChannel に登録する
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "部屋に入室する時の通知"
-            val description = "部屋に入室するときの通知が表示されます。"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(channelId, name, importance).apply {
-                this.description = description
-            }
-
-            // システムにチャンネルを登録する
-            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            manager.createNotificationChannel(channel)
-        }
+        val builder = NotificationCompat.Builder(this,"room_inside_notify")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("入退室を検知しました。")
+            .setContentText("タップして体温の記入をお願いします。")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            // Set the intent that will fire when the user taps the notification
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
 
         with(NotificationManagerCompat.from(this)) {
-            notify(1234567, builder.build())
+            // notificationId is a unique int for each notification that you must define
+            notify(22, builder.build())
+        }
+
+
+
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//
+//        val openIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+//
+//        val channelId = "room_inside_notify"
+//        val builder = NotificationCompat.Builder(this, channelId).apply {
+//            setSmallIcon(R.drawable.ic_launcher_foreground)
+//            setContentTitle("Notification Title")
+//            setContentText("本文みたいなところだよ〜ん。ある程度長い文字列を入れても大丈夫なんだよ〜ん")
+//            setContentIntent(openIntent)
+//            priority = NotificationCompat.PRIORITY_HIGH
+//            setAutoCancel(true)
+//        }
+//
+//// API 26 以上の場合は NotificationChannel に登録する
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val name = "部屋に入室する時の通知"
+//            val description = "部屋に入室するときの通知が表示されます。"
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val channel = NotificationChannel(channelId, name, importance).apply {
+//                this.description = description
+//            }
+//
+//            // システムにチャンネルを登録する
+//            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//            manager.createNotificationChannel(channel)
+//        }
+//
+//        with(NotificationManagerCompat.from(this)) {
+//            notify(1234567, builder.build())
+//        }
+    }
+
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val name = "入退室検知通知"
+            val descriptionText = "入退室を検知した時に通知するチャンネルです。"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("room_inside_notify", name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
         }
     }
+
 
     override fun didExitRegion(region: Region?) {
         insideRegion = false
