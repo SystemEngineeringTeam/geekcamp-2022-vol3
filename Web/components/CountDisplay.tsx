@@ -1,17 +1,11 @@
 import type { NextPage } from 'next';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import UserDisplay from './UserDisplay';
+import { useRecoilValue } from 'recoil';
+import { userListState } from 'pages';
+
 
 const CountDisplay: NextPage = () => {
-    const [getUsers, setUsers] = useState<number>(0);
-    useEffect(() => {
-        const getUser = async () => {
-            const users = await axios.get('/api/status');
-            console.log(users.data);
-        };
-        getUser();
-    }, []);
+    const getUserList = useRecoilValue(userListState);
 
     return (
         <>
@@ -21,7 +15,7 @@ const CountDisplay: NextPage = () => {
                 </div>
                 <div className="card-content">
                     <h1 className="card-title">現在:</h1>
-                    <h1 className="card-count">{getUsers}人</h1>
+                    <h1 className="card-count">{getUserList.length}人</h1>
                 </div>
             </section>
             <UserDisplay />
