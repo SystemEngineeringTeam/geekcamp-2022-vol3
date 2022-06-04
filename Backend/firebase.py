@@ -4,8 +4,10 @@ import firebase_admin
 from firebase_admin import credentials
 import time
 import threading
-import array
-import numpy as np
+from csv import reader
+
+uuid = []
+major = []
 
 def worker():
     print(time.time())
@@ -30,31 +32,40 @@ def main():
     cred = credentials.Certificate(JSON_PATH)
     firebase_admin.initialize_app(cred)
     db = firestore.client()
-    name = np.array(['hoge','fuga','piyo'],dtype=str)
+    #name = np.array(['hoge','fuga','piyo'],dtype=str)
 
     doc_user = db.collection('User').get()
     # ====================================================================
 
 
     while True:
+        with open('./beacon_out.csv', 'r') as csv_file:
+            csv_reader = reader(csv_file)
+    # Passing the cav_reader object to list() to get a list of lists
+            for row in csv_reader:
+                major.append(str(row[0]))
+                uuid.append(str(row[1]))
+            #print(list_of_rows[0][0])
+            print(major)
+            #print(list_of_rows[0][1])
         dt_now = datetime.datetime.now()
         try:
             # Firestoreのコレクションにアクセス
             doc_ref = db.collection(u'RoomLog').document(dt_now.strftime(u'%Y-%m-%d')).collection(u"Times").document(dt_now.strftime(u'%H:%M'))
             # Firestoreにドキュメントidを指定しないで１つづつニュースを保存
             doc_ref.set({
-                u'NAME': name[np.random.randint(0,3)],
+                u'NAME': 'hoge',
                 u'TIME':dt_now.strftime(u'%H:%M'),
             })
         except:
             print('error')
-        print(dt_now.strftime(u'%Y-%m-%d %H:%M:%S'))
+        #print(dt_now.strftime(u'%Y-%m-%d %H:%M:%S'))
         for _ in doc_user:
-            print(_.id)
+            #print(_.id)
             doc = db.collection(u'User').document(_.id)
             my_dict = doc.get().to_dict()
-            print(my_dict["UUID"])
-            print(my_dict["NAME"])
+            # print(my_dict["UUID"])
+            # print(my_dict["NAME"])
         schedule(5, worker)
 print('done')
 
