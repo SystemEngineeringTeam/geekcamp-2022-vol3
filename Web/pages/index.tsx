@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import NavigateBar from "../components/NavigateBar";
+import CountDisplay from '../components/CountDisplay';
 
 const Home: NextPage = () => {
   const [getUsers, setUsers] = useState();
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
   return (
     <>
       <NavigateBar />
-      {getUsers}
+      <CountDisplay />
     </>
   );
 }
