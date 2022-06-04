@@ -74,7 +74,7 @@ export default async function handler(
     // 現在の入室状況を取得する
     if (req.method === 'GET') {
         const RoomLog = db.collection(COLLECTION_NAME);
-        const entering_room_status = await RoomLog.doc(getDate()).collection("Times").doc("15-00").get();
+        const entering_room_status = await RoomLog.doc("2022-6-4").collection("Times").doc("15-00").get();
         const current_uuid = entering_room_status.data()?.UUID;
         const current_name = entering_room_status.data()?.NAME;
 
