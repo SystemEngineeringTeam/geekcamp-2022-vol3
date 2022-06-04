@@ -1,7 +1,9 @@
 package io.github.com.harutiro.tempmanager.welcome_ui.stater
 
+import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -164,15 +166,35 @@ class StaterFragment : Fragment() {
                                 .whereEqualTo("EMAIL", user?.email.toString())
                                 .get()
                                 .addOnSuccessListener { result ->
+                                    var user: MutableMap<String, Any>? = null
+
                                     for (document in result) {
+
+                                        user = document.data
+
                                         Log.d(TAG, "${document.id} => ${document.data}")
-                                        Log.d(TAG, "${document.id} => ${document.data.size}")
+                                        Log.d(TAG, "${document.id} => ${user["ICONIMAGE"]}")
+
+
+
                                     }
 
-                                    if(result.size()>0){
-                                        requireActivity().finish()
 
-                                        //TODO ここでUserデータをシャプリに保存
+
+                                    if(result.size()>0){
+
+
+                                        val dataStore: SharedPreferences = requireActivity().getSharedPreferences("DateStore", Context.MODE_PRIVATE)
+
+                                        val editor = dataStore.edit()
+                                        editor.putString("UUID", user?.get("UUID").toString())
+                                        editor.putString("ID", user?.get("ID").toString())
+                                        editor.putString("EMAIL", user?.get("EMAIL").toString())
+                                        editor.putString("NAME", user?.get("NAME").toString())
+                                        editor.putString("ICONIMAGE", user?.get("ICONIMAGE").toString())
+                                        editor.apply()
+
+                                        requireActivity().finish()
 
                                     }else{
                                         requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem = 1

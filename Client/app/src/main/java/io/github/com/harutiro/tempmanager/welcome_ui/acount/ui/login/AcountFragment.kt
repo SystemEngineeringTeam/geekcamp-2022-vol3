@@ -1,5 +1,7 @@
 package io.github.com.harutiro.tempmanager.welcome_ui.acount.ui.login
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -64,9 +66,16 @@ class AcountFragment : Fragment() {
                     Log.w(TAG, "Error adding document", e)
                 }
 
-            //TODO ここでUserデータをシャプリに保存
+            val dataStore: SharedPreferences = requireActivity().getSharedPreferences("DateStore", Context.MODE_PRIVATE)
 
+            val editor = dataStore.edit()
+            editor.putString("UUID", user["UUID"])
+            editor.putString("ID", user["ID"])
+            editor.putString("EMAIL", user["EMAIL"])
+            editor.putString("NAME", user["NAME"])
+            editor.putString("ICONIMAGE", user["ICONIMAGE"])
 
+            editor.apply()
 
         }
 
