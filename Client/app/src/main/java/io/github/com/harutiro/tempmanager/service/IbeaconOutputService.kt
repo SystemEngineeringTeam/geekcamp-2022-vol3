@@ -29,6 +29,9 @@ class IbeaconOutputService : Service() {
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
+
+    lateinit var beaconTransmitter: BeaconTransmitter
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.i("Service","onStartCommand called")
@@ -63,7 +66,7 @@ class IbeaconOutputService : Service() {
 
         //ビーコンのパーサーの作成、ibeaconの取得をするときに必要
         val beaconParser = BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24")
-        val beaconTransmitter = BeaconTransmitter(applicationContext, beaconParser)
+        beaconTransmitter = BeaconTransmitter(applicationContext, beaconParser)
 
         //テキストボックスの情報を取得
         val uuid = intent?.getStringExtra("UUID") ?:""
@@ -96,10 +99,21 @@ class IbeaconOutputService : Service() {
 
 
 
+
+
         return START_STICKY
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        beaconTransmitter.stopAdvertising()
+
     }
 
     override fun stopService(name: Intent?): Boolean {
         return super.stopService(name)
+
+
     }
 }
