@@ -78,6 +78,7 @@ export default async function handler(
     if (req.method === 'GET') {
         const RoomLog = db.collection(COLLECTION_NAME);
         console.log(getDate());
+        console.log(getTime());
         const entering_room_status = await RoomLog.doc(getDate()).collection("Times").doc(getTime()).get();
         const current_uuid = entering_room_status.data()?.UUID;
         const current_name = entering_room_status.data()?.NAME;
