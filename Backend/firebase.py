@@ -95,7 +95,7 @@ def main():
                 print('ok')
             except:
                 print('error')
-        schedule(60, worker)
+        schedule(2, worker)
 
 if __name__ == '__main__':
     main()
