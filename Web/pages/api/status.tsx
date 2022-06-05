@@ -3,12 +3,15 @@ import { getFirestore } from 'firebase-admin/firestore';
 const admin = require('firebase-admin');
 
 
-// 日付(YYYY/MM/DD)を取得し、パースする関数(YYYY-MM-DD)
 function getDate() {
-    const date = new Date().toLocaleDateString();
-    const date_parse = date.split('/').join('-');
-    return date_parse;
+    const dt = new Date();
+    var y = dt.getFullYear();
+    var m = ('00' + (dt.getMonth() + 1)).slice(-2);
+    var d = ('00' + dt.getDate()).slice(-2);
+    return (y + '-' + m + '-' + d);
 }
+
+
 
 // 時間(HH-MM)を取得
 function getTime() {
@@ -74,7 +77,8 @@ export default async function handler(
     // 現在の入室状況を取得する
     if (req.method === 'GET') {
         const RoomLog = db.collection(COLLECTION_NAME);
-        const entering_room_status = await RoomLog.doc("2022-6-4").collection("Times").doc("15-00").get();
+        console.log(getDate());
+        const entering_room_status = await RoomLog.doc(getDate()).collection("Times").doc(getTime()).get();
         const current_uuid = entering_room_status.data()?.UUID;
         const current_name = entering_room_status.data()?.NAME;
 
