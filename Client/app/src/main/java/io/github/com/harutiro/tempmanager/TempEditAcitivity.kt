@@ -40,4 +40,7 @@ class TempEditAcitivity : AppCompatActivity() {
 
 
     }
+
+    //戻る動作無効
+    override fun onBackPressed() {}
 }
