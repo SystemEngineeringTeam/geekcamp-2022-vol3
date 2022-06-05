@@ -22,6 +22,16 @@ def schedule(interval, f, wait=True):
         t.join()
     next_time = ((base_time - time.time()) % interval) or interval
     time.sleep(next_time)
+# 5分単位にし、現在の時刻から5分刻みにする
+def time5():
+    dt_now = datetime.datetime.now()
+    dt_now = dt_now.replace(minute=dt_now.minute - dt_now.minute % 5, second=0, microsecond=0)
+    # Dateの削除
+    dt_now = dt_now.replace(hour=dt_now.hour, minute=dt_now.minute, second=0, microsecond=0)
+    # HH-MMの形式にする
+    dt_now = dt_now.strftime(u'%H-%M')
+    return dt_now
+
 
 def main():
     # ===================== Firebase =====================================
@@ -63,7 +73,7 @@ def main():
             print("mydict")
             print(my_dict)
             print("end")     
-
+            print(time5())
             # UUIDが一致するものを探す
             for i in uuid:
                 if my_dict['UUID'] in i:
@@ -74,7 +84,8 @@ def main():
                         allUsersNAMEList.append(my_dict['NAME'])
             try:
                     # Firestoreのコレクションにアクセス
-                doc_ref = db.collection(u'RoomLog').document(dt_now.strftime(u'%Y-%m-%d')).collection(u"Times").document(dt_now.strftime(u'%H-%M'))
+                
+                doc_ref = db.collection(u'RoomLog').document(dt_now.strftime(u'%Y-%m-%d')).collection(u"Times").document(time5())
                     #Firestoreにドキュメントidを指定しないで１つづつニュースを保存
                 data = {
                     u'NAME': allUsersNAMEList,
@@ -84,7 +95,7 @@ def main():
                 print('ok')
             except:
                 print('error')
-        schedule(300, worker)
+        schedule(60, worker)
 
 if __name__ == '__main__':
     main()
