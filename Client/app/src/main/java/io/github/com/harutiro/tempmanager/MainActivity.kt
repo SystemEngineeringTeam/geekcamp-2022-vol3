@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
         val intent = Intent(this,TempEditAcitivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
 
         val builder = NotificationCompat.Builder(this,"room_inside_notify")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
