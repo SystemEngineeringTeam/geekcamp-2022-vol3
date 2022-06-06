@@ -76,8 +76,11 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
         beaconManager.removeAllMonitorNotifiers()
         beaconManager.removeAllRangeNotifiers()
         beaconManager.rangedRegions.forEach {region ->
-            beaconManager.stopRangingBeaconsInRegion(region)
+            beaconManager.stopRangingBeacons(region)
+            beaconManager.stopMonitoring(region)
+
         }
+
 
         beaconManager.beaconParsers.clear()
         beaconManager.beaconParsers.add(BeaconParser().setBeaconLayout(IBEACON_FORMAT))
