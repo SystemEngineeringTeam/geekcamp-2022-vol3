@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "27205989241",
-    "project_id": "geekcamp-edcea",
-    "storage_bucket": "geekcamp-edcea.appspot.com"
+    "project_number": "1058820707670",
+    "project_id": "geekcamp2022vol3-2",
+    "storage_bucket": "geekcamp2022vol3-2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:27205989241:android:921f3b12064216923d75a8",
+        "mobilesdk_app_id": "1:1058820707670:android:a4644c513a57330d47f2f7",
         "android_client_info": {
           "package_name": "io.github.com.harutiro.tempmanager"
         }
       },
       "oauth_client": [
         {
-          "client_id": "27205989241-uq8h2kaf56p1djs269v6nhgi3ufsls2b.apps.googleusercontent.com",
+          "client_id": "1058820707670-4ns6hc7dpipm7s67h7ni4f77vekjt7s7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "io.github.com.harutiro.tempmanager",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "27205989241-ld20gdfnhrtt0br33tp08bqiqa7itn8l.apps.googleusercontent.com",
+          "client_id": "1058820707670-5p2vsv6m4uaqd1p8ns4eqo29u2fmcdcd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAdOv-u8bwBt7ljMO1p-RI-fAehExXtOEM"
+          "current_key": "AIzaSyBzthJkUIaZI5F3biQRVjDngcBLyiZCou0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "27205989241-ld20gdfnhrtt0br33tp08bqiqa7itn8l.apps.googleusercontent.com",
+              "client_id": "1058820707670-5p2vsv6m4uaqd1p8ns4eqo29u2fmcdcd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
