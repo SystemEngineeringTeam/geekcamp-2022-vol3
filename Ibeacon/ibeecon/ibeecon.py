@@ -63,3 +63,4 @@ while True:
     uuid_list.clear()
     # 発火処理
     schedule(300, worker)
+    
