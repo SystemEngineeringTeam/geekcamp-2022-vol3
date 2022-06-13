@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "geekcamp-edcea",
+  "private_key_id": "70568808a05f78519c15f04d36551f553561f761",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCHmeqCGqZZXpBk\ncIr/GhDxvAF9zjzNWOWyz9AOG67OTHq2jrSCUrlhwevmVQY6Bhdez9ngcKUO+AZa\n3pzjcGNTaNqvGXmidtoU4c5cifaiRgOAvEBqP4ViKbnlD5uPQtErioxVcme6NbbE\nZ7TjxcMx2Nu82Q8sl3aLTZ9F6EEmDGpPlPOA192euwQ0yMOzDrvVICCTDUlJO7++\n3cPiG/sZlcrX+Zkt2bKvnhFsjdhIubyKGcrJWm38yf1Jr9s1L05MyXh9pHzml1Jj\nMV253gMFFa3ffKtWxSKkXmcEi9Cw3u/IReIFktB/k1PXGTwZ2lPAUqOcdYGbcTz1\ncTJL8ji/AgMBAAECggEAIdop8ksG5l62O2zhNmhifIbL9IVNJpKf3XEF5s/AZx4u\nsG6V38cZIq+P3dOyF0A4C2JmaSKWAlOm+n6CukDvev49QeNhO07iiL4Kj42dtcs2\nyqe0iRHMkcIK94Va93vdzjnraNWD0bfhJc0iGo7feQ1DZjTmFeLGJGa/cWtXAFFS\nG2ZTT0McDms+hFg9QH0nbMgfcYOb2TFWczPkeWj38vKJ4Fd1rSRBLH+fTUD6Qfg1\nGJZnXOWPPnRZUqlNirItBIA+QpzN6oM2A5VweJfscL8HykAmy72Q4ilaqrRDa4Gq\nZRptMJyq2gkA6YBQJ1LBlfkTA62fK5FKBYYSQEZYWQKBgQC9Ehg24QjXp7J3Dk1m\nOg+vxSuwbcRB1JQAYkTEIgW1tXpQIctDxhvUynvc0VMyCJIEVpBCx/tWbINu8R5Q\n2xCQR1dhxaJThTHCELoJx3c89GH6GBsu5niVUEN1fFFPn50T8/OmrzeHTtPOy12P\ntk53j93Ivpz7Q5HxEiM0BLpfXQKBgQC3mlRfR+nCTJoZtqQlvg493hxVlTEJYiRZ\nkdrEraXfj9k/nWwXhxlpiE2pBY++yS8al7eIvG6glXYMTcsqP5ZWJWiIPWHVpgm5\nNftHJaueq92UrxT8wtjFOUhaibtS3ZLxXPwPMlbpw6Tjr7m1EB49KGNQnSa7Dg7u\npovJYtNiywKBgHvlmZyMxsCbEeXWp32v2ouyRzjsFUmWRg4iVzG3oco7TBWqr4qQ\nDbjZn2VKfpww5Y6WMx6v8dHmdhKDSvxtMWN6fJaDbiYRCFRFpcO2xDpbYsECfv2y\n5Z3i5PHeL2JgFAz5NdcqxtaSH1ZKCduc+bp7ujhMQI6e7snsusjhuEe5AoGAGHLl\nn1Z9K1F2B8yJaTk4vkZQcZkPUZePDZpdjmktOGr4W/9DgJKN8L6k0MgbzyUNL7Za\nS0wEUz/z20mUr0iOZWRP2iyKVZ/plY85qcy7YMK0G/OAkPQFV6X8G4pRtoQo6Bkg\nu4lRh4l08Jja2uCNlklFiFuU573EgUUOQj/1tCcCgYB9+2+GwxxiiaBLRQ8tsbz0\nejEX2eXy6+AhBOHzkQXxslZ2JhtPSokGV0psBJmG+/7uDhLv2fPKKM6w9P6eEBA1\n9ahsP1CU33ZisNUjXkckH0zWnypfiEZB0fIMdWoOLDwbgWKy7iIQEUFoHoi5Trji\nhXKishS6fzad4FNoTB+6QQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-s006f@geekcamp-edcea.iam.gserviceaccount.com",
+  "client_id": "104344493623038144516",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-s006f%40geekcamp-edcea.iam.gserviceaccount.com"
+}

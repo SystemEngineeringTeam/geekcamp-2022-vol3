@@ -93,7 +93,7 @@ int enable_advertising(int advertising_interval, char *advertising_uuid, int maj
   if (ret < 0)
   {
     hci_close_dev(device_handle);
-    fprintf(stderr, "Can't send request %s (%d)\n", strerror(errno), errno);
+    //fprintf(stderr, "Can't send request %s (%d)\n", strerror(errno), errno);
     return(1);
   }
 
@@ -192,13 +192,13 @@ int disable_advertising()
 
   if (ret < 0) 
   {
-    fprintf(stderr, "Can't set advertise mode: %s (%d)\n", strerror(errno), errno);
+    //fprintf(stderr, "Can't set advertise mode: %s (%d)\n", strerror(errno), errno);
     return(1);
   }
 
   if (status) 
   {
-    fprintf(stderr, "LE set advertise enable on returned status %d\n", status);
+    //fprintf(stderr, "LE set advertise enable on returned status %d\n", status);
     return(1);
   }
 }
@@ -212,7 +212,7 @@ void main(int argc, char **argv)
 {
   if(argc != 6)
   {
-    fprintf(stderr, "Usage: %s <advertisement time in ms> <UUID> <major number> <minor number> <RSSI calibration amount>\n", argv[0]);
+    //fprintf(stderr, "Usage: %s <advertisement time in ms> <UUID> <major number> <minor number> <RSSI calibration amount>\n", argv[0]);
     exit(1);
   }
 
