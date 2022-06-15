@@ -1,6 +1,6 @@
 # "THE SUSHI-WARE LICENSE"
 
-<make.just.on@gmail.com> wrote this file.
+System Engineering Team wrote this file.
 
 As long as you retain this notice you can do whatever you want
 with this stuff. If we meet some day, and you think this stuff
