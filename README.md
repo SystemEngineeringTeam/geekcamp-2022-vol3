@@ -1,13 +1,20 @@
-# Geekcamp 2022 vol3
+
+# 人の入り見れる蔵(hito no iri mi reru zou)
+
+![](https://i.imgur.com/UxpA2Gz.png)
 
 ## Introduction
 
+このシステムは、スマートフォンから送られてくるビーコン情報をRaspberry Piで受信し、部屋の入退室管理を行うものです。
+また、現在誰が部屋にいるのか、Web上で確認することができます。
 
 ## Environment
 
 | Tool    | Version  |
 | ------- | -------- |
-| Node.js | v16.15.0 |
+| Python  | 3.10.5   |
+| Kotlin        |  ?        |
+| Node.js | 16.15.0 |
 
 ## Usage
 
@@ -16,18 +23,25 @@
 ``` pip install -r requirements.txt ```
 
 ### raspberrypi
+
 #### send_beacon
+
 ``` cd Ibeacon/bluez-beacon ```
-``` sudo ./ibeacon 200 ba4d8ef751a3110ca55dbca1afbba494 56562 1 -29```
+```sudo ./ibeacon 200 ba4d8ef751a3110ca55dbca1afbba494 56562 1 -29```
 
 #### receiving_beacon
+
 ``` cd Backend/beacon_send ```
 ``` python3 beacon.py ```
 
 ### Backend
 
-``` cd Backend```
+```cd Backend```
 ``` python3 firebase.py ```
+
+## Blueprint
+
+![](https://i.imgur.com/ivNt2UX.png)
 
 ## Contributing
 
@@ -37,3 +51,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
+[![SUSHI-WARE LICENSE](https://img.shields.io/badge/license-SUSHI--WARE%F0%9F%8D%A3-blue.svg)](https://github.com/MakeNowJust/sushi-ware)
