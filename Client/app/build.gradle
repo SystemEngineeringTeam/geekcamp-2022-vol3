@@ -74,4 +74,7 @@ dependencies {
 //    implementation 'org.altbeacon:android-beacon-library:2.19.4'
         implementation 'org.altbeacon:android-beacon-library:2.19.5-beta5'
 
+    //easyPermission
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
 }
