@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.8.2",
     "@mui/material": "^5.8.2",
     "axios": "^0.27.2",
+    "dicer": "^0.3.1",
     "firebase": "^9.8.2",
     "firebase-admin": "^10.2.0",
     "next": "12.1.6",
