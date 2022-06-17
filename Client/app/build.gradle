@@ -13,8 +13,8 @@ android {
         applicationId "io.github.com.harutiro.tempmanager"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "bate-1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -73,5 +73,8 @@ dependencies {
     //iBeacon
 //    implementation 'org.altbeacon:android-beacon-library:2.19.4'
         implementation 'org.altbeacon:android-beacon-library:2.19.5-beta5'
+
+    //easyPermission
+    implementation 'pub.devrel:easypermissions:3.0.0'
 
 }
