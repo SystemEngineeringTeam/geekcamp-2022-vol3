@@ -37,7 +37,6 @@ class WelcomeActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
         if(AppLaunchChecker.hasStartedFromLauncher(this)){
             Log.d("AppLaunchChecker","2回目以降");
         } else {
-            AppLaunchChecker.onActivityCreate(this);
             AlertDialog.Builder(this) // FragmentではActivityを取得して生成
                 .setTitle("位置情報の取り扱い")
                 .setMessage("このアプリでは位置情報によるアラート機能を可能にするために、現在地のデータが収集されます。\n" +
@@ -81,6 +80,8 @@ class WelcomeActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
     }
 
     override fun onPermissionsDenied(requestCode: Int, list: List<String>) {
-        finish()
+        EasyPermissions.requestPermissions(this, "パーミッションに関する説明", PERMISSION_REQUEST_CODE, *permissions)
+
+//        finish()
     }
 }

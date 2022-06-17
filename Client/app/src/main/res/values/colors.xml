@@ -11,5 +11,6 @@
 <!--    ui-->
     <color name="background">#F8F8F8</color>
     <color name="text">#434D67</color>
+    <color name="error">#F44336</color>
 
 </resources>

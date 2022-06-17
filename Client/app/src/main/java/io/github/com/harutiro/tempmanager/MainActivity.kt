@@ -9,20 +9,23 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.AppLaunchChecker
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import io.github.com.harutiro.tempmanager.databinding.ActivityMainBinding
 import io.github.com.harutiro.tempmanager.service.IbeaconOutputService
 import org.altbeacon.beacon.*
 import pub.devrel.easypermissions.EasyPermissions
 
-class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
+class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
 
     private lateinit var binding: ActivityMainBinding
 
@@ -42,6 +45,8 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
         Manifest.permission.BLUETOOTH_CONNECT,
         Manifest.permission.BLUETOOTH_SCAN,
     )
+    private val PERMISSION_REQUEST_CODE = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,9 +79,26 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (!EasyPermissions.hasPermissions(this, *permissions)) {
+            val snackbar = Snackbar.make(findViewById(R.id.cordinator_layout_main_activity),"パーミッションが許可されていいません。", Snackbar.LENGTH_SHORT)
+            snackbar.view.setBackgroundResource(R.color.error)
+            snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.purple_200))
+            snackbar.setTextColor(ContextCompat.getColor(this, R.color.purple_200))
+            snackbar.show()
+        }
+
+        ibeacon()
 
 
 
+    }
+
+    fun ibeacon(){
         //ここからビーコン関係
         if (EasyPermissions.hasPermissions(this, *permissions)) {
             val beaconManager = BeaconManager.getInstanceForApplication(this)
@@ -142,12 +164,13 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
 
             beaconManager.startRangingBeacons(region)
         }
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
 
-
-
-
-
+        //初回起動かどうかを判断する部分
+        AppLaunchChecker.onActivityCreate(this)
     }
 
     override fun didEnterRegion(arg0: Region?) {
@@ -260,4 +283,5 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier {
             }
         }
     }
+
 }
