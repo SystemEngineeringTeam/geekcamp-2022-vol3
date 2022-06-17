@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -48,6 +50,18 @@ class AcountFragment : Fragment() {
 
 
         binding.fixFavAcountFragment.setOnClickListener{
+
+
+            val re1 = Regex("^[a-z]\\d{5}$")
+
+            if(!binding.mainStudentNumberEditTextAcountFragment.text.toString().matches(re1)){
+                val snackbar = Snackbar.make(binding.cordinatorLayoutAcountFragment,"k22000のフォーマットで書き込んでください", Snackbar.LENGTH_SHORT)
+                snackbar.view.setBackgroundResource(R.color.error)
+                snackbar.setTextColor(ContextCompat.getColor(context!!, R.color.purple_200))
+                snackbar.show()
+                return@setOnClickListener
+            }
+
             val user = hashMapOf(
                 "UUID" to UUID.randomUUID().toString(),
                 "ID" to binding.mainStudentNumberEditTextAcountFragment.text.toString(),
