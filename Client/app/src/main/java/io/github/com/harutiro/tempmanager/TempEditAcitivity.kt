@@ -7,7 +7,9 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import io.github.com.harutiro.tempmanager.databinding.ActivityMainBinding
 import io.github.com.harutiro.tempmanager.databinding.ActivityTempEditAcitivityBinding
 import io.github.com.harutiro.tempmanager.service.IbeaconOutputService
@@ -35,6 +37,17 @@ class TempEditAcitivity : AppCompatActivity() {
 
 
         binding.registerButtonTempEditActivity.setOnClickListener {
+
+            val re2 = Regex("\\d{2}.\\d{1}$")
+
+            if(!binding.mainTempEditTextTempEditActivity.text.toString().matches(re2)){
+                val snackbar = Snackbar.make(binding.cordinatorLayoutTempEditActivity,"36.0のフォーマットで書き込んでください", Snackbar.LENGTH_SHORT)
+                snackbar.view.setBackgroundResource(R.color.error)
+                snackbar.setTextColor(ContextCompat.getColor(this, R.color.purple_200))
+                snackbar.show()
+                return@setOnClickListener
+            }
+
             val intent = Intent(this, IbeaconOutputService::class.java)
             intent.putExtra("UUID",dataStore.getString("UUID",""))
             intent.putExtra("TEMP",binding.mainTempEditTextTempEditActivity.text.toString())
