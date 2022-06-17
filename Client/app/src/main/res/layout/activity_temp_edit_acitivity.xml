@@ -36,6 +36,16 @@
         app:layout_constraintTop_toTopOf="@+id/temp_edit_text_temp_edit_activity"
         app:srcCompat="@drawable/device_thermostat_fill0_wght400_grad0_opsz48" />
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cordinator_layout_temp_edit_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/register_button_temp_edit_activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="124dp"
