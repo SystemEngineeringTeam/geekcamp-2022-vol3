@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
             //
             val builder = Notification.Builder(this)
             builder.setSmallIcon(R.drawable.ic_launcher_foreground)
-            builder.setContentTitle("Scanning for Beacons")
+            builder.setContentTitle("入退室をチェック中")
             val intent = Intent(this, TempEditAcitivity::class.java)
             val pendingIntent = PendingIntent.getActivity(
                 this, 0, intent, PendingIntent.FLAG_MUTABLE
@@ -133,9 +133,9 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(
                     "My Notification Channel ID",
-                    "My Notification Name", NotificationManager.IMPORTANCE_DEFAULT
+                    "入退室チェック通知チャンネル", NotificationManager.IMPORTANCE_DEFAULT
                 )
-                channel.description = "My Notification Channel Description"
+                channel.description = "ビーコンの読み取り時の通知チャンネル"
                 val notificationManager = getSystemService(
                     NOTIFICATION_SERVICE
                 ) as NotificationManager
