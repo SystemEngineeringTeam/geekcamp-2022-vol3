@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
             val builder = Notification.Builder(this)
             builder.setSmallIcon(R.drawable.ic_launcher_foreground)
             builder.setContentTitle("入退室をチェック中")
-            val intent = Intent(this, TempEditAcitivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             val pendingIntent = PendingIntent.getActivity(
                 this, 0, intent, PendingIntent.FLAG_MUTABLE
             )
