@@ -39,12 +39,22 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
 
     private val IBEACON_FORMAT = "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
 
-    val permissions = arrayOf(
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.BLUETOOTH_CONNECT,
-        Manifest.permission.BLUETOOTH_SCAN,
-    )
+
+
+    val permissions = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+        arrayOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH_CONNECT,
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_ADVERTISE
+        )
+    }else{
+        arrayOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+        )
+    }
     private val PERMISSION_REQUEST_CODE = 1
 
 
@@ -247,7 +257,6 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
     private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val name = "入退室検知通知"
             val descriptionText = "入退室を検知した時に通知するチャンネルです。"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
@@ -258,7 +267,6 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
-        }
     }
 
 
