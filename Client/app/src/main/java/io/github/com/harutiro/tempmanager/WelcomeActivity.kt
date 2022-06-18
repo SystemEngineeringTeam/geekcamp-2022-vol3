@@ -3,6 +3,7 @@ package io.github.com.harutiro.tempmanager
 import android.Manifest
 import android.app.AlertDialog
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -18,12 +19,21 @@ class WelcomeActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
     private lateinit var binding: ActivityWelcomeBinding
     private val PERMISSION_REQUEST_CODE = 1
 
-    val permissions = arrayOf(
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.BLUETOOTH_CONNECT,
-        Manifest.permission.BLUETOOTH_SCAN,
-    )
+    val permissions = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+        arrayOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH_CONNECT,
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_ADVERTISE
+
+        )
+    }else{
+        arrayOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+        )
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
