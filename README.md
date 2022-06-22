@@ -13,7 +13,7 @@
 | Tool    | Version  |
 | ------- | -------- |
 | Python  | 3.10.5   |
-| Kotlin        |  ?        |
+| Kotlin        |  1.6.21        |
 | Node.js | 16.15.0 |
 
 ## Usage
