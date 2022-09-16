@@ -55,8 +55,6 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
             Manifest.permission.ACCESS_FINE_LOCATION,
         )
     }
-    private val PERMISSION_REQUEST_CODE = 1
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,8 +102,6 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
 
         ibeacon()
 
-
-
     }
 
     fun ibeacon(){
@@ -126,12 +122,6 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
             beaconManager.beaconParsers.clear()
             beaconManager.beaconParsers.add(BeaconParser().setBeaconLayout(IBEACON_FORMAT))
 
-
-            // Uncomment the code below to use a foreground service to scan for beacons. This unlocks
-            // the ability to continually scan for long periods of time in the background on Andorid 8+
-            // in exchange for showing an icon at the top of the screen and a always-on notification to
-            // communicate to users that your app is using resources in the background.
-            //
             val builder = Notification.Builder(this)
             builder.setSmallIcon(R.drawable.ic_launcher_foreground)
             builder.setContentTitle("入退室をチェック中")
@@ -204,9 +194,6 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-
-
-
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             // User is signed in
@@ -217,56 +204,19 @@ class MainActivity : AppCompatActivity(), RangeNotifier,MonitorNotifier{
                 notify(22, builder.build())
             }
         }
-
-
-
-//        val intent = Intent(this, MainActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//
-//        val openIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-//
-//        val channelId = "room_inside_notify"
-//        val builder = NotificationCompat.Builder(this, channelId).apply {
-//            setSmallIcon(R.drawable.ic_launcher_foreground)
-//            setContentTitle("Notification Title")
-//            setContentText("本文みたいなところだよ〜ん。ある程度長い文字列を入れても大丈夫なんだよ〜ん")
-//            setContentIntent(openIntent)
-//            priority = NotificationCompat.PRIORITY_HIGH
-//            setAutoCancel(true)
-//        }
-//
-//// API 26 以上の場合は NotificationChannel に登録する
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val name = "部屋に入室する時の通知"
-//            val description = "部屋に入室するときの通知が表示されます。"
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val channel = NotificationChannel(channelId, name, importance).apply {
-//                this.description = description
-//            }
-//
-//            // システムにチャンネルを登録する
-//            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//            manager.createNotificationChannel(channel)
-//        }
-//
-//        with(NotificationManagerCompat.from(this)) {
-//            notify(1234567, builder.build())
-//        }
     }
 
     private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-                val name = "入退室検知通知"
-            val descriptionText = "入退室を検知した時に通知するチャンネルです。"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel("room_inside_notify", name, importance).apply {
-                description = descriptionText
-            }
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
+        val name = "入退室検知通知"
+        val descriptionText = "入退室を検知した時に通知するチャンネルです。"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel("room_inside_notify", name, importance).apply {
+            description = descriptionText
+        }
+        // Register the channel with the system
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 
 
