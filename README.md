@@ -43,6 +43,10 @@
 
 ![](https://i.imgur.com/ivNt2UX.png)
 
+## Slide
+
+https://docs.google.com/presentation/d/1HPZSVCowMsqZpYC6BxLSLmziRzbQEojV/edit?usp=sharing&ouid=103737357734306374267&rtpof=true&sd=true
+
 ## Contributing
 
 プルリクエストは歓迎します。大きな変更については、まず課題を作成して、変更したい内容を議論してください。
