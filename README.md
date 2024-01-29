@@ -39,6 +39,10 @@
 ```cd Backend```
 ``` python3 firebase.py ```
 
+## YouTube
+
+https://youtu.be/aXrKhL0umm0?si=0yWlDZsZpFt5BRA2
+
 ## Blueprint
 
 ![](https://i.imgur.com/ivNt2UX.png)
